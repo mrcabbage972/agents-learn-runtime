@@ -1,0 +1,50 @@
+{
+  "out_dir": "out",
+  "run_name": "med_hard_k_80_120",
+  "seed_start": 0,
+  "max_workers": 16,
+  "llm": {
+    "enabled": false,
+    "model": "gpt-4o-mini",
+    "temperature": 0.2,
+    "max_tokens": 1024,
+    "timeout_s": 120,
+    "max_concurrent_requests": 8,
+    "max_retries": 6,
+    "backoff_base_s": 0.5,
+    "backoff_max_s": 30.0,
+    "jitter_s": 0.2
+  },
+  "knapsack": {
+    "num_tasks": 20,
+    "n_items_range": [80, 120],
+    "weight_range": [5, 50],
+    "value_range": [10, 500],
+    "classes": [
+        "A", "B", "C", "D", "E", "F", 
+        "G", "H", "I", "J", "K", "L", 
+        "M", "N", "O", "P", "Q", "R",
+        "S", "T", "U", "V", "W", "X",
+        "Y", "Z"
+    ],
+    "num_allowed_classes": 5,
+    "capacity_ratio_range": [0.4, 0.6]
+  },
+  "navigation": {
+    "num_tasks": 20,
+    "horizon_range": [15, 25],
+    "extra_nodes_range": [10, 20],
+    "extra_edge_factor_range": [0.1, 0.3],
+    "max_steps_multiplier": 3.0
+  },
+  "rule_diagnosis": {
+    "num_tasks": 20,
+    "families": ["linear_int", "affine_mod"],
+    "linear_a_range": [-10, 10],
+    "linear_b_range": [-20, 20],
+    "mod_m_choices": [13, 17, 19, 23],
+    "mod_a_range": [1, 20],
+    "mod_b_range": [0, 20],
+    "probe_budget_range": [10, 15]
+  }
+}

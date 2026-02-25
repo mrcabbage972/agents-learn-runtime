@@ -1,0 +1,44 @@
+{
+  "out_dir": "out",
+  "run_name": "hard_k_30_50",
+  "seed_start": 2000,
+  "max_workers": 16,
+  "llm": {
+    "enabled": false,
+    "model": "gpt-4o-mini",
+    "temperature": 0.2,
+    "max_tokens": 384,
+    "timeout_s": 90,
+    "max_concurrent_requests": 8,
+    "max_retries": 8,
+    "backoff_base_s": 0.75,
+    "backoff_max_s": 45.0,
+    "jitter_s": 0.3
+  },
+  "knapsack": {
+    "num_tasks": 20,
+    "n_items_range": [30, 50],
+    "weight_range": [1, 25],
+    "value_range": [1, 80],
+    "classes": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"],
+    "num_allowed_classes": 3,
+    "capacity_ratio_range": [0.28, 0.45]
+  },
+  "navigation": {
+    "num_tasks": 20,
+    "horizon_range": [30, 50],
+    "extra_nodes_range": [15, 35],
+    "extra_edge_factor_range": [0.25, 0.55],
+    "max_steps_multiplier": 3.2
+  },
+  "rule_diagnosis": {
+    "num_tasks": 20,
+    "families": ["linear_int", "affine_mod"],
+    "linear_a_range": [-12, 12],
+    "linear_b_range": [-50, 50],
+    "mod_m_choices": [5, 7, 11, 13, 17, 19, 23, 29, 31],
+    "mod_a_range": [1, 30],
+    "mod_b_range": [0, 30],
+    "probe_budget_range": [6, 12]
+  }
+}
