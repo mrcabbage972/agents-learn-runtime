@@ -1,0 +1,33 @@
+output_dir: output/benchmarks/cross_flora_persistent_easy
+run_name: cross_flora_persistent_easy
+seed_start: 123456789
+max_concurrent_runs: 1
+cache_db_path: ./cache/llm_cache_cross_flora_persistent_easy.sqlite
+
+task_families:
+  - knapsack
+
+# Cross-eval: Forget LoRA + Persistent runtime
+# Requires:
+#   1. vLLM server with --enable-lora --lora-modules qwen3-8b-forget-lora=out/qwen3-8b-forget-a100
+#   2. export OPENAI_API_BASE=http://localhost:8000/v1
+#   3. export OPENAI_API_KEY=EMPTY
+#   4. export NOTHINK=true
+
+agents:
+  - name: qwen3-8b-cross-flora-persistent-easy
+    agent_type: codeact
+    persistent_state: true
+    max_turns: 40
+    timeout_s: 900
+    llm:
+      model: openai/qwen3-8b-forget-lora
+      temperature: 0.2
+      max_tokens: 12288
+      timeout_s: 300
+      max_concurrent_requests: 1
+      max_retries: 3
+      backoff_base_s: 1.0
+      backoff_max_s: 30.0
+      jitter_s: 0.5
+      cache_enabled: false

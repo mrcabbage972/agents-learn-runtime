@@ -1,0 +1,34 @@
+output_dir: output/benchmarks/medium_lora
+run_name: medium_lora
+seed_start: 123456789
+max_concurrent_runs: 1
+cache_db_path: ./cache/llm_cache_medium_lora.sqlite
+
+task_families:
+  - knapsack
+
+# NOTE: Requires:
+#   1. vLLM server running with --enable-lora --lora-modules qwen3-8b-lora=out/qwen3-8b-a100
+#   2. export OPENAI_API_BASE=http://localhost:8000/v1
+#   3. export OPENAI_API_KEY=EMPTY
+#   4. export NOTHINK=true  # Disable Qwen3 thinking mode
+#
+# For A100 inference with LoRA, use: NOTHINK=true make serve-a100-lora LORA_DIR=out/qwen3-8b-a100
+
+agents:
+  - name: qwen3-8b-medium-lora
+    agent_type: codeact
+    persistent_state: true
+    max_turns: 40
+    timeout_s: 900
+    llm:
+      model: openai/qwen3-8b-lora
+      temperature: 0.2
+      max_tokens: 12288
+      timeout_s: 300
+      max_concurrent_requests: 1
+      max_retries: 3
+      backoff_base_s: 1.0
+      backoff_max_s: 30.0
+      jitter_s: 0.5
+      cache_enabled: false

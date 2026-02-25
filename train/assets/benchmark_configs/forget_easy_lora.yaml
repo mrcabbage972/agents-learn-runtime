@@ -1,0 +1,34 @@
+output_dir: output/benchmarks/forget_easy_lora
+run_name: forget_easy_lora
+seed_start: 123456789
+max_concurrent_runs: 1
+cache_db_path: ./cache/llm_cache_forget_easy_lora.sqlite
+
+task_families:
+  - knapsack
+
+# NOTE: Requires:
+#   1. vLLM server with --enable-lora --lora-modules qwen3-8b-forget-lora=out/qwen3-8b-forget-a100
+#   2. export OPENAI_API_BASE=http://localhost:8000/v1
+#   3. export OPENAI_API_KEY=EMPTY
+#   4. export NOTHINK=true
+#
+# Start with: NOTHINK=true LORA_NAME=qwen3-8b-forget-lora ./train/inference_a100.sh --lora out/qwen3-8b-forget-a100
+
+agents:
+  - name: qwen3-8b-forget-easy-lora
+    agent_type: codeact
+    persistent_state: false
+    max_turns: 40
+    timeout_s: 900
+    llm:
+      model: openai/qwen3-8b-forget-lora
+      temperature: 0.2
+      max_tokens: 12288
+      timeout_s: 300
+      max_concurrent_requests: 1
+      max_retries: 3
+      backoff_base_s: 1.0
+      backoff_max_s: 30.0
+      jitter_s: 0.5
+      cache_enabled: false

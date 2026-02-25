@@ -1,0 +1,31 @@
+output_dir: output/benchmarks/react_easy_base
+run_name: react_easy_base
+seed_start: 123456789
+max_concurrent_runs: 1
+cache_db_path: ./cache/llm_cache_react_easy_base.sqlite
+
+task_families:
+  - knapsack
+
+# ReAct base model benchmark
+# Requires:
+#   export OPENAI_API_BASE=http://localhost:8000/v1
+#   export OPENAI_API_KEY=EMPTY
+#   export NOTHINK=true
+
+agents:
+  - name: qwen3-8b-react-easy-base
+    agent_type: react
+    max_turns: 20
+    timeout_s: 600
+    llm:
+      model: openai/qwen3-8b
+      temperature: 0.2
+      max_tokens: 12288
+      timeout_s: 300
+      max_concurrent_requests: 1
+      max_retries: 3
+      backoff_base_s: 1.0
+      backoff_max_s: 30.0
+      jitter_s: 0.5
+      cache_enabled: false

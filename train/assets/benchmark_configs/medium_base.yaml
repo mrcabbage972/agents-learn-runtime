@@ -1,0 +1,33 @@
+output_dir: output/benchmarks/medium_base
+run_name: medium_base
+seed_start: 123456789
+max_concurrent_runs: 1
+cache_db_path: ./cache/llm_cache_medium_base.sqlite
+
+task_families:
+  - knapsack
+
+# NOTE: Requires environment variables:
+#   export OPENAI_API_BASE=http://localhost:8000/v1
+#   export OPENAI_API_KEY=EMPTY
+#   export NOTHINK=true  # Disable Qwen3 thinking mode
+#
+# For A100 inference, use: NOTHINK=true make serve-a100
+
+agents:
+  - name: qwen3-8b-medium-base
+    agent_type: codeact
+    persistent_state: true
+    max_turns: 40
+    timeout_s: 900
+    llm:
+      model: openai/qwen3-8b
+      temperature: 0.2
+      max_tokens: 12288
+      timeout_s: 300
+      max_concurrent_requests: 1
+      max_retries: 3
+      backoff_base_s: 1.0
+      backoff_max_s: 30.0
+      jitter_s: 0.5
+      cache_enabled: false
