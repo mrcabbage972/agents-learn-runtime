@@ -1,6 +1,6 @@
 # Agents Learn Their Runtime
 
-Official repository for the paper **"Agents Learn Their Runtime: Interpreter Persistence as a Training-Time Semantic"**. This study isolates the effect of persistent executable state during training to determine if it functions as a learned inductive bias or an inference-time scaffold.
+Official repository for the paper **"Agents Learn Their Runtime: Interpreter Persistence as Training-Time Semantics"**. This study isolates the effect of persistent executable state during training to determine if it functions as a learned inductive bias or an inference-time scaffold.
 
 ## Installation
 
