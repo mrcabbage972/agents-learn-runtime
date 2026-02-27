@@ -16,8 +16,9 @@ task_families:
 agents:
   - name: qwen3-8b-react-easy-base
     agent_type: react
-    max_turns: 20
+    max_turns: 40
     timeout_s: 600
+    max_tool_calls: 25
     llm:
       model: openai/qwen3-8b
       temperature: 0.2

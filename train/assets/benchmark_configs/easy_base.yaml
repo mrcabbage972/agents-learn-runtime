@@ -20,6 +20,7 @@ agents:
     persistent_state: true
     max_turns: 40
     timeout_s: 900
+    max_tool_calls: 25
     llm:
       model: openai/qwen3-8b
       temperature: 0.2
